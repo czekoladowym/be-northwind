@@ -4,9 +4,9 @@ import Controller from './controllers';
 
 class App {
 	app: exress.Application;
-	private port: number;
+	private port: string | undefined;
 	private controllers: Controller[];
-	constructor(port: number, controllers: Controller[]) {
+	constructor(port: string | undefined, controllers: Controller[]) {
 		this.app = exress();
 		this.port = port;
 		this.controllers = controllers;

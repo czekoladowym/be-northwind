@@ -8,6 +8,12 @@ export const employeesTable = sqliteTable('Employees', {
 	titleOfCourtesy: text('TitleOfCourtesy'),
 	birthDate: text('BirthDate'),
 	hireDate: text('HireDate'),
-	adress: text('Adress'),
+	address: text('Address'),
 	city: text('City'),
+	region: text('Region'),
+	postal: text('PostalCode'),
+	phone: text('HomePhone'),
+	extension: text('Extension'),
+	notes: text('Notes'),
+	reportsTo: text('ReportsTo'),
 });

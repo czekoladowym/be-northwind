@@ -1,17 +1,44 @@
 import App from './app';
-import CustomersController from './controllers/Customers';
 import db from './database';
-import { CustomersRepository } from './database/repositories/Customers';
 import CustomersService from './services/Customers';
+import EmployeesService from './services/Employees';
+import CustomersController from './controllers/Customers';
+import EmployeesController from './controllers/Employees';
+import { CustomersRepository } from './database/repositories/Customers';
+import { EmployeesRepository } from './database/repositories/Employees';
+import SuppliesController from './controllers/Suppliers';
+import { SuppliesRepository } from './database/repositories/Suppliers';
+import SuppliesService from './services/Suppliers';
+import { config } from 'dotenv';
+
+config();
+
+const PORT = process.env.PORT;
 
 const main = async () => {
-	const customersRepository = new CustomersRepository(db);
-	const customersService = new CustomersService(customersRepository);
-	const customersController = new CustomersController(customersService);
+	try {
+		const customersRepo = new CustomersRepository(db);
+		const customersService = new CustomersService(customersRepo);
+		const customersController = new CustomersController(customersService);
 
-	const controllers = [customersController];
-	const app = new App(3000, controllers);
+		const employeesRepo = new EmployeesRepository(db);
+		const employeesService = new EmployeesService(employeesRepo);
+		const employeesController = new EmployeesController(employeesService);
 
-	app.start();
+		const suppliesRepo = new SuppliesRepository(db);
+		const suppliesService = new SuppliesService(suppliesRepo);
+		const suppliesController = new SuppliesController(suppliesService);
+
+		const controllers = [
+			customersController,
+			employeesController,
+			suppliesController,
+		];
+		const app = new App(PORT, controllers);
+
+		app.start();
+	} catch (e) {
+		console.log(e);
+	}
 };
 main();

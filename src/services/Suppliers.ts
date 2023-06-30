@@ -1,14 +1,13 @@
-import { CustomersRepository } from '@/database/repositories/Customers';
-
-class CustomersService {
-	constructor(private customers: CustomersRepository) {}
+import { SuppliesRepository } from '@/database/repositories/Suppliers';
+class SuppliesService {
+	constructor(private supplies: SuppliesRepository) {}
 	public getAll = (start: number, count: number) => {
 		const startTimestamp = Date.now();
-		const customers = this.customers.getAll(start, count);
+		const supplies = this.supplies.getAll(start, count);
 		const endTimestamp = Date.now();
 		const time = endTimestamp - startTimestamp;
 
-		const query = this.customers.getAllQuery(start, count);
+		const query = this.supplies.getAllQuery(start, count);
 		query.params.forEach((param: unknown) => {
 			const stringParam = param as string;
 			query.sql = query.sql.replace('?', stringParam);
@@ -16,24 +15,24 @@ class CustomersService {
 		query.sql = query.sql.replace('\\', ' ');
 		return {
 			sql: query.sql,
-			customers: customers?.customers,
+			supplies: supplies?.supplies,
 			time,
 		};
 	};
 	public getOne = (id: string) => {
 		const startTimestamp = Date.now();
-		const customer = this.customers.getOne(id);
+		const supplier = this.supplies.getOne(id);
 		const endTimestamp = Date.now();
 		const time = endTimestamp - startTimestamp;
 
-		const query = this.customers.getOneQuery(id);
+		const query = this.supplies.getOneQuery(id);
 		query.params.forEach((param: unknown) => {
 			const stringParam = param as string;
 			query.sql = query.sql.replace('?', stringParam);
 		});
 		query.sql = query.sql.replace('\\', ' ');
 
-		return { customer, time, sql: query.sql };
+		return { supplier, time, sql: query.sql };
 	};
 }
-export default CustomersService;
+export default SuppliesService;
