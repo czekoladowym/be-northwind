@@ -10,6 +10,9 @@ import SuppliesController from './controllers/Suppliers';
 import { SuppliesRepository } from './database/repositories/Suppliers';
 import SuppliesService from './services/Suppliers';
 import { config } from 'dotenv';
+import { ProductsRepository } from './database/repositories/Products';
+import ProductsController from './controllers/Products';
+import ProductsService from './services/Products';
 
 config();
 
@@ -29,10 +32,15 @@ const main = async () => {
 		const suppliesService = new SuppliesService(suppliesRepo);
 		const suppliesController = new SuppliesController(suppliesService);
 
+		const productsRepo = new ProductsRepository(db);
+		const productsService = new ProductsService(productsRepo);
+		const productsController = new ProductsController(productsService);
+
 		const controllers = [
 			customersController,
 			employeesController,
 			suppliesController,
+			productsController,
 		];
 		const app = new App(PORT, controllers);
 
