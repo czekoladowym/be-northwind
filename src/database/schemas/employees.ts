@@ -16,4 +16,5 @@ export const employeesTable = sqliteTable('Employees', {
 	extension: text('Extension'),
 	notes: text('Notes'),
 	reportsTo: text('ReportsTo'),
+	country: text('Country'),
 });
