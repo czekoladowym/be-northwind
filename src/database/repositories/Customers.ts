@@ -47,7 +47,7 @@ export class CustomersRepository {
 		const customers = this.db
 			.select({
 				name: customersTable.companyName,
-				contect: customersTable.contactName,
+				contact: customersTable.contactName,
 				title: customersTable.contactTitle,
 				phone: customersTable.phone,
 			})
