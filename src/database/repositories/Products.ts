@@ -46,8 +46,8 @@ export class ProductsRepository {
 	public getSearched = (search: string) => {
 		const products = this.db
 			.select({
-				productNeme: productsTable.name,
-				quality: productsTable.quantity,
+				productName: productsTable.name,
+				quantity: productsTable.quantity,
 				price: productsTable.price,
 				unitsInStock: productsTable.stock,
 			})
