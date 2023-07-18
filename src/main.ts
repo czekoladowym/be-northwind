@@ -13,6 +13,8 @@ import { config } from 'dotenv';
 import { ProductsRepository } from './database/repositories/Products';
 import ProductsController from './controllers/Products';
 import ProductsService from './services/Products';
+import { SearchService } from './services/Search';
+import SearchController from './controllers/Search';
 
 config();
 
@@ -36,11 +38,15 @@ const main = async () => {
 		const productsService = new ProductsService(productsRepo);
 		const productsController = new ProductsController(productsService);
 
+		const searchService = new SearchService(customersRepo, productsRepo);
+		const searchController = new SearchController(searchService);
+
 		const controllers = [
 			customersController,
 			employeesController,
 			suppliesController,
 			productsController,
+			searchController,
 		];
 		const app = new App(PORT, controllers);
 
