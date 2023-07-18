@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, like } from 'drizzle-orm';
 import { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 import { productsTable } from '../schemas/products';
 
@@ -42,5 +42,18 @@ export class ProductsRepository {
 			.toSQL();
 
 		return query;
+	};
+	public getSearched = (search: string) => {
+		const products = this.db
+			.select({
+				productNeme: productsTable.name,
+				quality: productsTable.quantity,
+				price: productsTable.price,
+				unitsInStock: productsTable.stock,
+			})
+			.from(productsTable)
+			.where(like(productsTable.name, `%${search}%`))
+			.all();
+		return products;
 	};
 }
