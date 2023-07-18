@@ -11,7 +11,7 @@ class SearchController extends Controller {
 	private getSearched = (req: Request, res: Response) => {
 		const searchType = req.query.type;
 		const searchValue = req.query.value;
-		if (searchType !== 'customers' && searchType !== 'suppliers') {
+		if (searchType !== 'customers' && searchType !== 'products') {
 			return res.status(400).json({ message: 'Invalid search type' });
 		}
 		if (typeof searchValue !== 'string') {

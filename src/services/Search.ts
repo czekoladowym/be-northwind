@@ -10,7 +10,7 @@ export class SearchService {
 		if (type === 'customers') {
 			const customers = this.customers.getSearched(value);
 			return customers;
-		} else if (type === 'suppliers') {
+		} else if (type === 'products') {
 			const suppliers = this.products.getSearched(value);
 			return suppliers;
 		}
