@@ -46,6 +46,7 @@ export class CustomersRepository {
 	public getSearched = (search: string) => {
 		const customers = this.db
 			.select({
+				customerId: customersTable.id,
 				name: customersTable.companyName,
 				contact: customersTable.contactName,
 				title: customersTable.contactTitle,
